@@ -1,0 +1,52 @@
+- name: debian package requirements
+  apt:
+    pkg:
+      # PostgreSQL
+      - postgresql
+      - libpq-dev
+      # django
+      - python3
+      - python3-pip
+      - python3-dev
+      - build-essential
+      - libxml2-dev
+      - libxslt1-dev
+      - libffi-dev
+      - libpq-dev
+      - libssl-dev
+      - redis-server
+      - zlib1g-dev
+      # ansible
+      - git
+      - python-psycopg2
+
+- name: terminfrontend user user
+  user:
+    name: terminfrontend
+    system: yes
+    home: /var/lib/terminfrontend
+
+- name: terminfrontend home directory
+  file:
+    path: /var/lib/terminfrontend
+    mode: u=rwx,g=rx,o=
+    owner: terminfrontend
+    group: terminfrontend
+    state: directory
+
+- name: clone covid-videoplattform/django-webfrontend repository
+  git:
+    repo: https://github.com/covid-videoplattform/django-webfrontend.git
+    dest: /opt/terminfrontend
+    version: master
+
+- name: python3env bin directory
+  file:
+    path: /opt/python3env/bin
+    state: directory
+
+- name: python3env binary link
+  file:
+    src: /usr/bin/python3
+    dest: /opt/python3env/bin/python
+    state: link

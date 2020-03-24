@@ -1,1 +1,5 @@
 ---
+_local_facts:
+  database_password: "{% if not ansible_local[role_name].database_password is defined %}{{ lookup('password', '/dev/null length=32 chars=ascii_letters') }}{% else %}{{ ansible_local[role_name].database_password }}{% endif %}"
+  secret_key: "{% if not ansible_local[role_name].secret_key is defined %}{{ lookup('password', '/dev/null length=64 chars=ascii_letters,digits,punctuation') }}{% else %}{{ ansible_local[role_name].secret_key }}{% endif %}"
+  redis_password: "{% if not ansible_local[role_name].database_password is defined %}{{ lookup('password', '/dev/null length=32 chars=ascii_letters') }}{% else %}{{ ansible_local[role_name].database_password }}{% endif %}"

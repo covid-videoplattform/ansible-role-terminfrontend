@@ -1,1 +1,48 @@
 ---
+
+- import_tasks: local_facts.yaml
+- import_tasks: setup.yaml
+- import_tasks: database.yaml
+
+# - name: terminfrontend media directory
+#   file:
+#     path: /opt/terminfrontend/terminfrontend/media
+#     state: directory
+#     owner: terminfrontend
+#     group: terminfrontend
+#     mode: 0700
+#
+# - name: terminfrontend static directory
+#   file:
+#     path: /opt/terminfrontend/terminfrontend/static
+#     state: directory
+#     owner: terminfrontend
+#     group: terminfrontend
+
+- name: terminfrontend pip requirements
+  pip:
+    executable: pip3
+    requirements: /opt/terminfrontend/requirements.txt
+
+- name: terminfrontend configuration
+  template:
+    src: settings.py.j2
+    dest: /opt/terminfrontend/covid_videoplattform/settings.py
+
+- block:
+  - name: terminfrontend database migrations
+    django_manage:
+      command: migrate
+      app_path: /opt/terminfrontend
+
+  - name: terminfrontend static assets
+    django_manage:
+      command: collectstatic
+      app_path: /opt/terminfrontend
+
+  become: True
+  become_user: terminfrontend
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  environment:
+    PATH: "/opt/python3env/bin:{{ ansible_env.PATH }}"

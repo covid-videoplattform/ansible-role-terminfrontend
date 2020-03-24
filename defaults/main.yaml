@@ -1,1 +1,10 @@
 ---
+terminfrontend_server_name: "{{ inventory_hostname }}"
+
+terminfrontend_db_name: terminfrontend
+terminfrontend_db_user: terminfrontend
+terminfrontend_db_pass: "{{ ansible_local[role_name].database_password }}"
+
+terminfrontend_secret_key: "{{ ansible_local[role_name].secret_key }}"
+
+terminfrontend_redis_password: "{{ ansible_local.terminfrontend.redis_password }}"
