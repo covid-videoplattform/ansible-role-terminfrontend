@@ -61,3 +61,20 @@
     dest: /etc/uwsgi/apps-enabled/terminfrontend.json
     state: link
   notify: restart uwsgi
+
+- import_role:
+    name: certificate
+  vars:
+    certificate_name: terminfrontend
+    certificate_directory: /etc/ssl
+    certificate_key_usage:
+      - digitalSignature
+      - keyEncipherment
+    certificate_extended_key_usage:
+      - serverAuth
+    certificate_common_name: "{{ terminfrontend_server_name }}"
+
+- import_role:
+    name: nginx
+  vars:
+    nginx_vhosts: "{{ terminfrontend_nginx_vhosts }}"
