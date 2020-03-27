@@ -14,12 +14,3 @@
 
   become: true
   become_user: postgres
-
-- import_role:
-    name: redis
-  vars:
-    redis_databases: 2
-    redis_requirepass: "{{terminfrontend_redis_password}}"
-
-- name: flush handlers
-  meta: flush_handlers

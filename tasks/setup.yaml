@@ -15,7 +15,6 @@
       - libffi-dev
       - libpq-dev
       - libssl-dev
-      - redis-server
       - zlib1g-dev
       # uwsgi
       - uwsgi
