@@ -1,0 +1,18 @@
+SECRET_KEY = '{{terminfrontend_secret_key}}'
+
+JITSI_BASE_URL = 'https://{{jitsi_domain}}/'
+
+# Database
+# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': '{{terminfrontend_db_name}}',
+        'USER': '{{terminfrontend_db_user}}',
+        'PASSWORD': '{{terminfrontend_db_pass}}',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
+
+import settings

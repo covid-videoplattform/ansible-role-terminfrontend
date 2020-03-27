@@ -26,8 +26,8 @@
 
 - name: terminfrontend configuration
   template:
-    src: settings.py.j2
-    dest: /opt/terminfrontend/covid_videoplattform/settings.py
+    src: settings_local.py.j2
+    dest: /etc/terminfrontend/covid_videoplattform/setting_local.py
 
 - block:
   - name: terminfrontend database migrations
