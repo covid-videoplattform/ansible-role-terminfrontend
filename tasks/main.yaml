@@ -47,3 +47,17 @@
   environment:
     PATH: "/opt/python3env/bin:{{ ansible_env.PATH }}"
     DJANGO_SETTINGS_MODULE: covid_videoplattform.settings_local
+
+- name: terminfrontend uwsgi configuration
+  copy:
+    content:
+      uwsgi: "{{terminfrontend_uwsgi_config}}"
+    dest: /etc/uwsgi/apps-available/terminfrontend.json
+  notify: restart uwsgi
+
+- name: enable terminfrontend uwsgi configuration
+  file:
+    src: ../apps-available/terminfrontend.json
+    dest: /etc/uwsgi/apps-enabled/terminfrontend.json
+    state: link
+  notify: restart uwsgi

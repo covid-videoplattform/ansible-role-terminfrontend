@@ -17,6 +17,9 @@
       - libssl-dev
       - redis-server
       - zlib1g-dev
+      # uwsgi
+      - uwsgi
+      - uwsgi-plugin-python3
       # ansible
       - git
       - python-psycopg2
