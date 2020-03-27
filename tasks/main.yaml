@@ -27,7 +27,7 @@
 - name: terminfrontend configuration
   template:
     src: settings_local.py.j2
-    dest: /etc/terminfrontend/covid_videoplattform/setting_local.py
+    dest: /opt/terminfrontend/covid_videoplattform/settings_local.py
 
 - block:
   - name: terminfrontend database migrations
@@ -35,10 +35,10 @@
       command: migrate
       app_path: /opt/terminfrontend
 
-  - name: terminfrontend static assets
-    django_manage:
-      command: collectstatic
-      app_path: /opt/terminfrontend
+  # - name: terminfrontend static assets
+  #   django_manage:
+  #     command: collectstatic
+  #     app_path: /opt/terminfrontend
 
   become: True
   become_user: terminfrontend
@@ -46,3 +46,4 @@
     ansible_python_interpreter: /usr/bin/python3
   environment:
     PATH: "/opt/python3env/bin:{{ ansible_env.PATH }}"
+    DJANGO_SETTINGS_MODULE: covid_videoplattform.settings_local
