@@ -25,10 +25,9 @@ terminfrontend_nginx_vhosts:
         uwsgi_pass unix:/run/uwsgi/app/terminfrontend/socket;
         include uwsgi_params;
       }
-      # location /media  {
-      #   alias /path/to/your/mysite/media;
-      # }
-      #
+      location /media/ {
+        alias /opt/terminfrontend/media/;
+      }
       location /static/ {
         alias /opt/terminfrontend/static/;
       }

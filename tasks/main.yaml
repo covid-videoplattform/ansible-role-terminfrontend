@@ -4,13 +4,13 @@
 - import_tasks: setup.yaml
 - import_tasks: database.yaml
 
-# - name: terminfrontend media directory
-#   file:
-#     path: /opt/terminfrontend/terminfrontend/media
-#     state: directory
-#     owner: terminfrontend
-#     group: terminfrontend
-#     mode: 0700
+- name: terminfrontend media directory
+  file:
+    path: /opt/terminfrontend/terminfrontend/media
+    state: directory
+    owner: terminfrontend
+    group: terminfrontend
+    mode: 0700
 
 - name: terminfrontend static directory
   file:
