@@ -22,6 +22,18 @@
       # ansible
       - git
       - python-psycopg2
+      - npm
+
+- name: install less from npm
+  npm:
+    name: less
+    global: yes
+
+- name: link less to fix weird behavior of django
+  file:
+    src: /usr/local/bin/lessc
+    dest: /usr/bin/lessc
+    state: link
 
 - name: terminfrontend user user
   user:
@@ -42,6 +54,7 @@
     repo: https://github.com/covid-videoplattform/django-webfrontend.git
     dest: /opt/terminfrontend
     version: master
+  notify: restart uwsgi
 
 - name: python3env bin directory
   file:
