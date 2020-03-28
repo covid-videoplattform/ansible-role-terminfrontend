@@ -42,6 +42,11 @@
   #     command: collectstatic
   #     app_path: /opt/terminfrontend
 
+  - name: compress
+    django_manage:
+      command: compress
+      app_path: /opt/terminfrontend
+
   become: True
   become_user: terminfrontend
   vars:
