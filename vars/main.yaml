@@ -14,3 +14,21 @@ terminfrontend_uwsgi_config:
   harakiri: 20
   max-requests: 5000
   plugin: python3
+
+terminfrontend_nginx_vhosts:
+  - name: terminfrontend
+    server_names:
+      - "{{ terminfrontend_server_name }}"
+    custom: |-
+      client_max_body_size 1M;   # adjust to taste
+      location / {
+        uwsgi_pass unix:/run/uwsgi/app/terminfrontend/socket;
+        include uwsgi_params;
+      }
+      # location /media  {
+      #   alias /path/to/your/mysite/media;
+      # }
+      #
+      location /static/ {
+        alias /opt/terminfrontend/static/;
+      }

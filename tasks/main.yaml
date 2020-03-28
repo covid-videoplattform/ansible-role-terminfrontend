@@ -11,23 +11,25 @@
 #     owner: terminfrontend
 #     group: terminfrontend
 #     mode: 0700
-#
-# - name: terminfrontend static directory
-#   file:
-#     path: /opt/terminfrontend/terminfrontend/static
-#     state: directory
-#     owner: terminfrontend
-#     group: terminfrontend
+
+- name: terminfrontend static directory
+  file:
+    path: /opt/terminfrontend/static
+    state: directory
+    owner: terminfrontend
+    group: terminfrontend
 
 - name: terminfrontend pip requirements
   pip:
     executable: pip3
     requirements: /opt/terminfrontend/requirements.txt
+  notify: restart uwsgi
 
 - name: terminfrontend configuration
   template:
     src: settings_local.py.j2
     dest: /opt/terminfrontend/covid_videoplattform/settings_local.py
+  notify: restart uwsgi
 
 - block:
   - name: terminfrontend database migrations
