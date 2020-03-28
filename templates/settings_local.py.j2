@@ -1,5 +1,5 @@
 
-import covid_videoplattform.settings
+from .settings import *
 
 SECRET_KEY = '{{terminfrontend_secret_key}}'
 
@@ -18,4 +18,10 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['{{terminfrontend_server_name}}']
+CSRF_TRUSTED_ORIGINS = ['{{terminfrontend_server_name}}']
+CSRF_COOKIE_SECURE = True
+
+{% if terminfrontend_debug %}
+DEBUG = True
+{% endif %}
