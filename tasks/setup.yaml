@@ -58,13 +58,6 @@
     group: terminfrontend
     state: directory
 
-- name: clone covid-videoplattform/django-webfrontend repository
-  git:
-    repo: https://github.com/covid-videoplattform/django-webfrontend.git
-    dest: /opt/terminfrontend
-    version: master
-  notify: restart uwsgi
-
 - name: python3env bin directory
   file:
     path: /opt/python3env/bin

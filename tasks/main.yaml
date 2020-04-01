@@ -4,6 +4,13 @@
 - import_tasks: setup.yaml
 - import_tasks: database.yaml
 
+- name: clone covid-videoplattform/django-webfrontend repository
+  git:
+    repo: https://github.com/covid-videoplattform/django-webfrontend.git
+    dest: /opt/terminfrontend
+    version: develop
+  notify: restart uwsgi
+
 - name: terminfrontend media directory
   file:
     path: /opt/terminfrontend/terminfrontend/media
